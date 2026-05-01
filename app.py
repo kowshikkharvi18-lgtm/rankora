@@ -2,6 +2,9 @@ from flask import Flask, jsonify, request, render_template
 import random, os
 from datetime import datetime, date
 
+# Ensure DB is copied to /tmp on every worker startup (Render ephemeral FS fix)
+import startup  # noqa: F401  — side-effect: sets DB_PATH env var + copies DB
+
 app = Flask(__name__, static_folder="static", template_folder="templates")
 
 USE_MYSQL = False
