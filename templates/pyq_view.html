@@ -1,0 +1,383 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title id="page-title">PYQ — Rankora</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>(function(){var t=localStorage.getItem('rankora-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+<style>
+body { background: var(--bg); color: var(--text); font-family: 'Inter',system-ui,sans-serif; -webkit-font-smoothing: antialiased; }
+
+.pv-header {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 12px 20px; position: sticky; top: 0; z-index: 100;
+  box-shadow: var(--s1); display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 8px;
+}
+.pv-header-left { display: flex; align-items: center; gap: 10px; }
+.back-btn {
+  color: var(--p); text-decoration: none; font-size: .78rem; font-weight: 600;
+  padding: 6px 13px; border: 1px solid var(--p4); border-radius: 20px;
+  transition: all .2s; background: var(--p3);
+}
+.back-btn:hover { background: var(--p); color: #fff; }
+[data-theme="dark"] .back-btn { background: rgba(99,102,241,.12); border-color: rgba(99,102,241,.3); }
+[data-theme="dark"] .back-btn:hover { background: var(--p); }
+.pv-title { font-family: 'Sora',sans-serif; font-weight: 700; font-size: .95rem; color: var(--text); }
+.pv-meta { font-size: .7rem; color: var(--text3); margin-top: 1px; }
+.pv-header-right { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+
+.search-box {
+  padding: 7px 14px; border: 1px solid var(--border); border-radius: 20px;
+  font-size: .75rem; background: var(--bg2); color: var(--text);
+  width: 170px; font-family: 'Inter',sans-serif; transition: all .2s;
+}
+.search-box:focus { outline: none; border-color: var(--p4); }
+.toggle-btn {
+  padding: 6px 14px; background: var(--p3); color: var(--p2);
+  border: 1px solid var(--p4); border-radius: 20px; font-size: .75rem; font-weight: 700;
+  cursor: pointer; transition: all .2s; font-family: 'Inter',sans-serif;
+}
+.toggle-btn:hover { background: var(--p); color: #fff; }
+[data-theme="dark"] .toggle-btn { background: rgba(99,102,241,.15); color: #A5B4FC; border-color: rgba(99,102,241,.3); }
+.toggle-btn.hidden-mode { background: var(--bg2); color: var(--text3); border-color: var(--border); }
+.practice-btn {
+  padding: 6px 14px; background: linear-gradient(135deg, var(--lime), #16A34A);
+  color: #fff; border: none; border-radius: 20px; font-size: .75rem; font-weight: 700;
+  cursor: pointer; transition: all .2s; font-family: 'Inter',sans-serif;
+}
+.practice-btn:hover { transform: translateY(-1px); }
+.print-btn {
+  padding: 6px 13px; background: var(--bg2); color: var(--text3);
+  border: 1px solid var(--border); border-radius: 20px; font-size: .75rem;
+  font-weight: 600; cursor: pointer; transition: all .2s; font-family: 'Inter',sans-serif;
+}
+.print-btn:hover { border-color: var(--p4); color: var(--p); }
+
+.stats-bar {
+  background: linear-gradient(135deg, #1E1B4B, #312E81);
+  border-bottom: 1px solid rgba(99,102,241,.2);
+  padding: 16px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.stats-bar-title { flex: 1; font-family: 'Sora',sans-serif; font-size: .95rem; font-weight: 700; color: #fff; }
+.stats-bar-item { text-align: center; }
+.stats-bar-num { font-family: 'Sora',sans-serif; font-size: 1.4rem; font-weight: 800; color: #fff; }
+.stats-bar-lbl { font-size: .55rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .6px; margin-top: 2px; }
+.stats-bar-div { width: 1px; height: 32px; background: rgba(255,255,255,.1); }
+.stats-bar-badge {
+  background: rgba(99,102,241,.3); border: 1px solid rgba(99,102,241,.4);
+  color: #C7D2FE; font-size: .65rem; font-weight: 700; padding: 4px 12px;
+  border-radius: 20px; text-transform: uppercase; letter-spacing: .5px;
+}
+
+.section-group { margin: 0 20px 4px; }
+.section-heading {
+  display: flex; align-items: center; gap: 8px;
+  padding: 14px 0 8px; border-bottom: 1px solid var(--border); margin-bottom: 10px;
+  position: sticky; top: 57px; background: var(--bg); z-index: 10;
+}
+.section-icon { font-size: .95rem; }
+.section-heading-text { font-family: 'Sora',sans-serif; font-weight: 700; font-size: .88rem; color: var(--text); }
+.section-count {
+  background: var(--p3); color: var(--p2);
+  font-size: .62rem; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+}
+[data-theme="dark"] .section-count { background: rgba(99,102,241,.15); color: #A5B4FC; }
+
+.q-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r2); margin-bottom: 8px; overflow: hidden;
+  transition: border-color .2s, box-shadow .2s; box-shadow: var(--s1);
+}
+.q-card:hover { border-color: var(--p4); box-shadow: var(--s2); }
+[data-theme="dark"] .q-card:hover { border-color: rgba(99,102,241,.3); }
+
+.q-card-header { display: flex; align-items: flex-start; gap: 10px; padding: 14px 16px 10px; }
+.q-num-badge {
+  background: var(--p3); color: var(--p2);
+  font-family: 'Sora',sans-serif; font-weight: 700; font-size: .68rem;
+  padding: 3px 9px; border-radius: 20px; flex-shrink: 0; margin-top: 2px;
+  border: 1px solid var(--p4);
+}
+[data-theme="dark"] .q-num-badge { background: rgba(99,102,241,.15); color: #A5B4FC; border-color: rgba(99,102,241,.3); }
+.q-text-view { font-size: .9rem; line-height: 1.65; color: var(--text); font-weight: 500; flex: 1; }
+
+.q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 0 16px 12px; }
+.q-opt {
+  display: flex; align-items: center; gap: 7px; padding: 8px 11px;
+  border-radius: var(--r3); border: 1px solid var(--border);
+  font-size: .8rem; color: var(--text2); background: var(--bg2);
+}
+.q-opt.correct {
+  background: rgba(34,197,94,.08); border-color: rgba(34,197,94,.3);
+  color: #16A34A; font-weight: 700;
+}
+[data-theme="dark"] .q-opt.correct { background: rgba(34,197,94,.1); color: #86EFAC; border-color: rgba(34,197,94,.25); }
+.q-opt.correct .opt-ltr { background: rgba(34,197,94,.15); color: var(--lime); }
+.opt-ltr {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--border); display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora',sans-serif; font-weight: 700; font-size: .65rem;
+  color: var(--text3); flex-shrink: 0;
+}
+
+.q-answer-row {
+  padding: 8px 16px 12px; border-top: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 8px; flex-wrap: wrap;
+}
+.answer-badge {
+  background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.25);
+  color: #16A34A; font-size: .72rem; font-weight: 700;
+  padding: 4px 11px; border-radius: 20px; flex-shrink: 0;
+}
+[data-theme="dark"] .answer-badge { background: rgba(34,197,94,.1); color: #86EFAC; border-color: rgba(34,197,94,.2); }
+.expl-text {
+  font-size: .75rem; color: var(--text3); line-height: 1.6; flex: 1;
+  background: var(--p3); padding: 6px 10px;
+  border-radius: var(--r4); border-left: 2px solid var(--p4);
+}
+[data-theme="dark"] .expl-text { background: rgba(99,102,241,.08); border-left-color: rgba(99,102,241,.3); }
+.expl-text strong { color: var(--p2); }
+[data-theme="dark"] .expl-text strong { color: #A5B4FC; }
+
+.answers-hidden .q-opt.correct { background: var(--bg2); border-color: var(--border); color: var(--text2); font-weight: 400; }
+.answers-hidden .q-opt.correct .opt-ltr { background: var(--border); color: var(--text3); }
+.answers-hidden .q-answer-row { display: none; }
+
+.pv-loading { text-align: center; padding: 60px 20px; color: var(--text3); }
+.pv-loader {
+  width: 44px; height: 44px; margin: 0 auto 16px;
+  border-radius: 50%; border: 3px solid var(--border);
+  border-top-color: var(--p); animation: spin .75s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.pv-empty { text-align: center; padding: 60px 20px; color: var(--text3); font-size: .88rem; }
+
+.scroll-top {
+  position: fixed; bottom: 22px; right: 22px;
+  background: var(--p); color: #fff; border: none;
+  border-radius: 50%; width: 42px; height: 42px; font-size: 1rem;
+  cursor: pointer; display: none; align-items: center; justify-content: center;
+  box-shadow: var(--sp); transition: all .2s; z-index: 200;
+}
+.scroll-top.vis { display: flex; }
+.scroll-top:hover { background: var(--p2); transform: translateY(-2px); }
+
+@media (max-width: 600px) {
+  .q-options { grid-template-columns: 1fr; }
+  .stats-bar { padding: 12px 16px; gap: 12px; }
+  .pv-header { padding: 10px 14px; }
+  .section-group { margin: 0 14px 4px; }
+  .search-box { width: 130px; }
+  .section-heading { top: 60px; }
+}
+@media print {
+  .pv-header, .scroll-top { display: none !important; }
+  .section-heading { position: static; }
+  .answers-hidden .q-opt.correct { background: rgba(34,197,94,.08) !important; color: #16A34A !important; font-weight: 700 !important; }
+  .answers-hidden .q-answer-row { display: flex !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="pyq-page">
+  <div class="pv-header">
+    <div class="pv-header-left">
+      <a href="/" class="back-btn">← Home</a>
+      <div>
+        <div class="pv-title" id="header-title">Loading…</div>
+        <div class="pv-meta" id="header-meta"></div>
+      </div>
+    </div>
+    <div class="pv-header-right">
+      <input type="text" class="search-box" id="search-box" placeholder="🔍 Search questions…" oninput="filterQ()">
+      <button class="toggle-btn" id="toggle-btn" onclick="toggleAnswers()">👁 Hide Answers</button>
+      <button class="practice-btn" onclick="startPractice()">⚡ Practice Quiz</button>
+      <button class="print-btn" onclick="window.print()">🖨 Print</button>
+    </div>
+  </div>
+
+  <div id="content">
+    <div class="pv-loading">
+      <div class="pv-loader"></div>
+      <p>Loading questions…</p>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-top" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+var allQ = [], showAns = true;
+var LABELS = ['A','B','C','D'];
+var ICONS = {
+  'Computer Awareness':'💻',
+  'English Language':'📖',
+  'General Knowledge':'🌍',
+  'Analytical Reasoning':'🧠',
+  'Quantitative Analysis':'📐'
+};
+var ORDER = ['Computer Awareness','English Language','General Knowledge','Analytical Reasoning','Quantitative Analysis'];
+
+var params = new URLSearchParams(window.location.search);
+var year = params.get('year') || '';
+var ptype = params.get('type') || 'pyq';
+var titleText = ptype === 'model' ? 'Model Question Paper 2026' : 'PGCET ' + year + ' Question Paper';
+
+// Set title after DOM ready
+document.getElementById('header-title').textContent = titleText;
+document.title = titleText + ' — Rankora';
+
+function esc(s) {
+  if (!s) return '';
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+async function load() {
+  try {
+    var url = ptype === 'model'
+      ? '/pyq-data?type=model'
+      : '/pyq-data?year=' + encodeURIComponent(year) + '&type=pyq';
+    var res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    allQ = await res.json();
+    if (!Array.isArray(allQ) || !allQ.length) {
+      document.getElementById('content').innerHTML = '<div class="pv-empty">⚠️ No questions found for this paper.</div>';
+      return;
+    }
+    document.getElementById('header-meta').textContent = allQ.length + ' questions · Karnataka PGCET MCA';
+    render(allQ);
+  } catch(e) {
+    console.error('Load error:', e);
+    document.getElementById('content').innerHTML = '<div class="pv-empty">❌ Error: ' + e.message + '. Make sure server is running.</div>';
+  }
+}
+
+function render(questions) {
+  try {
+    var groups = {};
+    ORDER.forEach(function(s){ groups[s] = []; });
+    questions.forEach(function(q){
+      var subj = q.subject || 'Computer Awareness';
+      if (!groups[subj]) groups[subj] = [];
+      groups[subj].push(q);
+    });
+
+    var withExpl = questions.filter(function(q){ return q.explanation && q.explanation.trim(); }).length;
+    var html = '';
+
+    // Stats bar
+    html += '<div class="stats-bar">';
+    html += '<div class="stats-bar-title">' + esc(titleText) + '</div>';
+    html += '<div class="stats-bar-item"><div class="stats-bar-num">' + questions.length + '</div><div class="stats-bar-lbl">Questions</div></div>';
+    html += '<div class="stats-bar-div"></div>';
+    html += '<div class="stats-bar-item"><div class="stats-bar-num">100</div><div class="stats-bar-lbl">Marks</div></div>';
+    html += '<div class="stats-bar-div"></div>';
+    html += '<div class="stats-bar-item"><div class="stats-bar-num">120</div><div class="stats-bar-lbl">Minutes</div></div>';
+    html += '<div class="stats-bar-div"></div>';
+    html += '<div class="stats-bar-item"><div class="stats-bar-num">' + withExpl + '</div><div class="stats-bar-lbl">Explained</div></div>';
+    html += '<div class="stats-bar-badge">' + (ptype === 'model' ? 'Model 2026' : 'Practice Set ' + year) + '</div>';
+    html += '</div>';
+
+    var num = 1;
+    ORDER.forEach(function(subj){
+      var qs = groups[subj];
+      if (!qs || !qs.length) return;
+
+      html += '<div class="section-group" data-section="' + esc(subj) + '">';
+      html += '<div class="section-heading">';
+      html += '<span class="section-icon">' + (ICONS[subj] || '📌') + '</span>';
+      html += '<span class="section-heading-text">' + esc(subj) + '</span>';
+      html += '<span class="section-count">' + qs.length + ' Qs</span>';
+      html += '</div>';
+
+      qs.forEach(function(q){
+        var opts = [q.option1 || '', q.option2 || '', q.option3 || '', q.option4 || ''];
+        var ci = parseInt(q.correct_option || 1) - 1;
+        if (ci < 0 || ci > 3) ci = 0;
+        var cl = LABELS[ci];
+        var ct = opts[ci];
+        var qLow = (q.question || '').toLowerCase().replace(/['"]/g,'');
+
+        html += '<div class="q-card" data-text="' + qLow + '">';
+        html += '<div class="q-card-header">';
+        html += '<span class="q-num-badge">Q' + num + '</span>';
+        html += '<div class="q-text-view">' + esc(q.question) + '</div>';
+        html += '</div>';
+
+        html += '<div class="q-options">';
+        opts.forEach(function(opt, i){
+          html += '<div class="q-opt' + (i === ci ? ' correct' : '') + '">';
+          html += '<span class="opt-ltr">' + LABELS[i] + '</span>';
+          html += '<span>' + esc(opt) + '</span>';
+          html += '</div>';
+        });
+        html += '</div>';
+
+        html += '<div class="q-answer-row">';
+        html += '<span class="answer-badge">✅ ' + cl + '. ' + esc(ct) + '</span>';
+        if (q.explanation && q.explanation.trim()) {
+          html += '<div class="expl-text"><strong>💡</strong> ' + esc(q.explanation) + '</div>';
+        }
+        html += '</div>';
+        html += '</div>';
+        num++;
+      });
+
+      html += '</div>';
+    });
+
+    document.getElementById('content').innerHTML = html;
+  } catch(e) {
+    console.error('Render error:', e);
+    document.getElementById('content').innerHTML = '<div class="pv-empty">❌ Render error: ' + e.message + '</div>';
+  }
+}
+
+function toggleAnswers() {
+  showAns = !showAns;
+  var page = document.getElementById('pyq-page');
+  var btn = document.getElementById('toggle-btn');
+  if (showAns) {
+    page.classList.remove('answers-hidden');
+    btn.textContent = '👁 Hide Answers';
+    btn.classList.remove('hidden-mode');
+  } else {
+    page.classList.add('answers-hidden');
+    btn.textContent = '👁 Show Answers';
+    btn.classList.add('hidden-mode');
+  }
+}
+
+function filterQ() {
+  var q = (document.getElementById('search-box').value || '').toLowerCase().trim();
+  document.querySelectorAll('.q-card').forEach(function(c){
+    c.style.display = (!q || (c.getAttribute('data-text') || '').includes(q)) ? '' : 'none';
+  });
+  document.querySelectorAll('.section-group').forEach(function(g){
+    var vis = Array.from(g.querySelectorAll('.q-card')).some(function(c){ return c.style.display !== 'none'; });
+    g.style.display = vis ? '' : 'none';
+  });
+}
+
+function startPractice() {
+  window.location.href = ptype === 'model' ? '/?practice=model' : '/?practice=pyq&year=' + encodeURIComponent(year);
+}
+
+window.addEventListener('scroll', function(){
+  var b = document.getElementById('scroll-top');
+  if (b) { if (window.scrollY > 400) b.classList.add('vis'); else b.classList.remove('vis'); }
+});
+
+// Start loading
+load();
+</script>
+</body>
+</html>

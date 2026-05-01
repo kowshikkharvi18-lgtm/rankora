@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Study Q&A — Rankora</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body { background: var(--bg); color: var(--text); font-family: 'Inter',system-ui,sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* Header */
+.st-header {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 12px 20px; position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(12px); box-shadow: var(--s1);
+}
+.st-header-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.st-brand { display: flex; align-items: center; gap: 8px; }
+.st-brand-icon { width: 30px; height: 30px; background: linear-gradient(135deg, var(--lime), var(--teal)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: .85rem; }
+.st-brand-name { font-family: 'Sora',sans-serif; font-weight: 800; font-size: .92rem; color: var(--text); }
+.st-brand-name em { font-style: normal; color: var(--teal); }
+.st-actions { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.back-btn { color: var(--p); text-decoration: none; font-size: .75rem; font-weight: 600; padding: 5px 12px; border: 1px solid var(--p4); border-radius: 20px; transition: all .2s; background: var(--p3); }
+.back-btn:hover { background: var(--p); color: #fff; }
+[data-theme="dark"] .back-btn { background: rgba(99,102,241,.12); border-color: rgba(99,102,241,.3); }
+.search-box { padding: 7px 14px; border: 1px solid var(--border); border-radius: 20px; font-size: .75rem; background: var(--bg2); color: var(--text); width: 200px; font-family: 'Inter',sans-serif; transition: all .2s; }
+.search-box:focus { outline: none; border-color: var(--p4); background: var(--p3); }
+[data-theme="dark"] .search-box:focus { background: rgba(99,102,241,.08); }
+.print-btn { padding: 5px 12px; background: var(--bg2); color: var(--text3); border: 1px solid var(--border); border-radius: 20px; font-size: .72rem; font-weight: 600; cursor: pointer; transition: all .2s; font-family: 'Inter',sans-serif; }
+.print-btn:hover { border-color: var(--p4); color: var(--p); }
+
+/* Subject tabs */
+.subj-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.subj-tab { padding: 5px 13px; border-radius: 20px; font-size: .7rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--bg2); color: var(--text3); transition: all .2s; font-family: 'Inter',sans-serif; }
+.subj-tab:hover { border-color: var(--p4); color: var(--p); background: var(--p3); }
+[data-theme="dark"] .subj-tab:hover { background: rgba(99,102,241,.1); }
+.subj-tab.active { background: var(--p); border-color: var(--p); color: #fff; }
+.subj-tab.ca.active { background: #0284C7; border-color: #0284C7; }
+.subj-tab.en.active { background: #16A34A; border-color: #16A34A; }
+.subj-tab.gk.active { background: #D97706; border-color: #D97706; }
+.subj-tab.ar.active { background: #9333EA; border-color: #9333EA; }
+.subj-tab.qa.active { background: #E11D48; border-color: #E11D48; }
+
+/* Stats bar */
+.st-stats { background: linear-gradient(135deg, #1E1B4B, #312E81); border-bottom: 1px solid rgba(99,102,241,.2); padding: 14px 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.st-stats-title { flex: 1; font-family: 'Sora',sans-serif; font-size: .9rem; font-weight: 700; color: #fff; }
+.st-stat { text-align: center; }
+.st-stat-num { font-family: 'Sora',sans-serif; font-size: 1.3rem; font-weight: 800; color: #fff; }
+.st-stat-lbl { font-size: .55rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .5px; margin-top: 2px; }
+.st-stat-div { width: 1px; height: 30px; background: rgba(255,255,255,.1); }
+.st-badge { background: rgba(34,197,94,.2); border: 1px solid rgba(34,197,94,.3); color: #86EFAC; font-size: .62rem; font-weight: 700; padding: 4px 11px; border-radius: 20px; text-transform: uppercase; letter-spacing: .5px; }
+
+/* Section */
+.section-group { margin: 0 20px 4px; }
+.section-heading { display: flex; align-items: center; gap: 8px; padding: 14px 0 8px; border-bottom: 1px solid var(--border); margin-bottom: 10px; position: sticky; top: 120px; background: var(--bg); z-index: 10; }
+.section-icon { font-size: .95rem; }
+.section-heading-text { font-family: 'Sora',sans-serif; font-weight: 700; font-size: .88rem; color: var(--text); }
+.section-count { background: var(--p3); color: var(--p2); font-size: .62rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+[data-theme="dark"] .section-count { background: rgba(99,102,241,.15); color: #A5B4FC; }
+
+/* Question card */
+.q-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r2); margin-bottom: 8px; overflow: hidden; transition: border-color .2s, box-shadow .2s; box-shadow: var(--s1); border-left: 2px solid transparent; }
+.q-card:hover { border-color: var(--p4); box-shadow: var(--s2); }
+[data-theme="dark"] .q-card:hover { border-color: rgba(99,102,241,.3); }
+.q-card.hot-q { border-left-color: var(--amber); }
+
+.q-card-top { display: flex; align-items: flex-start; gap: 10px; padding: 13px 15px 9px; }
+.q-num { background: var(--p3); color: var(--p2); font-family: 'Sora',sans-serif; font-weight: 700; font-size: .65rem; padding: 3px 9px; border-radius: 20px; flex-shrink: 0; margin-top: 2px; border: 1px solid var(--p4); }
+[data-theme="dark"] .q-num { background: rgba(99,102,241,.15); color: #A5B4FC; border-color: rgba(99,102,241,.3); }
+.q-num.hot { background: rgba(245,158,11,.1); color: var(--amber); border-color: rgba(245,158,11,.25); }
+.q-question { font-size: .88rem; line-height: 1.65; color: var(--text); font-weight: 500; flex: 1; }
+
+/* Options */
+.q-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 0 15px 10px; }
+.q-opt { display: flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: var(--r3); border: 1px solid var(--border); font-size: .78rem; color: var(--text2); background: var(--bg2); }
+.q-opt.ans { background: rgba(34,197,94,.08); border-color: rgba(34,197,94,.3); color: #16A34A; font-weight: 700; }
+[data-theme="dark"] .q-opt.ans { background: rgba(34,197,94,.1); color: #86EFAC; border-color: rgba(34,197,94,.25); }
+.q-opt.ans .opt-l { background: rgba(34,197,94,.15); color: var(--lime); }
+.opt-l { width: 19px; height: 19px; border-radius: 50%; background: var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Sora',sans-serif; font-weight: 700; font-size: .62rem; color: var(--text3); flex-shrink: 0; }
+
+/* Answer */
+.q-answer { padding: 7px 15px 11px; border-top: 1px solid var(--border); display: flex; align-items: flex-start; gap: 7px; flex-wrap: wrap; }
+.ans-badge { background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.25); color: #16A34A; font-size: .7rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; flex-shrink: 0; }
+[data-theme="dark"] .ans-badge { background: rgba(34,197,94,.1); color: #86EFAC; border-color: rgba(34,197,94,.2); }
+.expl { font-size: .73rem; color: var(--text3); line-height: 1.6; flex: 1; background: var(--p3); padding: 5px 9px; border-radius: var(--r4); border-left: 2px solid var(--p4); }
+[data-theme="dark"] .expl { background: rgba(99,102,241,.08); border-left-color: rgba(99,102,241,.3); }
+.expl strong { color: var(--p2); }
+[data-theme="dark"] .expl strong { color: #A5B4FC; }
+
+/* States */
+.st-loading { text-align: center; padding: 60px 20px; color: var(--text3); }
+.st-loader { width: 44px; height: 44px; margin: 0 auto 16px; border-radius: 50%; border: 3px solid var(--border); border-top-color: var(--teal); animation: spin .75s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.st-empty { text-align: center; padding: 60px 20px; color: var(--text3); font-size: .88rem; }
+.no-results { text-align: center; padding: 30px; color: var(--text3); font-size: .82rem; }
+
+/* Scroll top */
+.scroll-top { position: fixed; bottom: 22px; right: 22px; background: var(--lime); color: #fff; border: none; border-radius: 50%; width: 42px; height: 42px; font-size: 1rem; cursor: pointer; display: none; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(34,197,94,.25); transition: all .2s; z-index: 200; }
+.scroll-top.vis { display: flex; }
+.scroll-top:hover { transform: translateY(-2px); }
+
+@media (max-width: 600px) {
+  .q-opts { grid-template-columns: 1fr; }
+  .st-stats { padding: 12px 16px; gap: 12px; }
+  .st-header { padding: 10px 14px; }
+  .section-group { margin: 0 14px 4px; }
+  .search-box { width: 140px; }
+  .section-heading { top: 130px; }
+}
+@media print {
+  .st-header, .scroll-top { display: none !important; }
+  .section-heading { position: static; }
+}
+</style>
+<script>
+(function(){var t=localStorage.getItem('rankora-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();
+</script>
+</head>
+<body>
+<div id="study-page">
+
+  <div class="st-header">
+    <div class="st-header-top">
+      <div class="st-brand">
+        <div class="st-brand-icon">📚</div>
+        <div class="st-brand-name">Rank<em>ora</em> Study</div>
+      </div>
+      <div class="st-actions">
+        <input type="text" class="search-box" id="search-box" placeholder="🔍 Search any question…" oninput="filterQ()">
+        <button class="print-btn" onclick="window.print()">🖨 Print</button>
+        <a href="/" class="back-btn">← Home</a>
+      </div>
+    </div>
+    <div class="subj-tabs" id="subj-tabs">
+      <button class="subj-tab active" onclick="switchSubj('all',this)">📋 All</button>
+      <button class="subj-tab ca" onclick="switchSubj('Computer Awareness',this)">💻 Computer</button>
+      <button class="subj-tab en" onclick="switchSubj('English Language',this)">📖 English</button>
+      <button class="subj-tab gk" onclick="switchSubj('General Knowledge',this)">🌍 GK</button>
+      <button class="subj-tab ar" onclick="switchSubj('Analytical Reasoning',this)">🧠 Reasoning</button>
+      <button class="subj-tab qa" onclick="switchSubj('Quantitative Analysis',this)">📐 Quant</button>
+    </div>
+  </div>
+
+  <div id="content">
+    <div class="st-loading">
+      <div class="st-loader"></div>
+      <p>Loading all questions…</p>
+    </div>
+  </div>
+
+</div>
+<button class="scroll-top" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+var allQ = [], curSubj = 'all';
+var LABELS = ['A','B','C','D'];
+var ICONS = {'Computer Awareness':'💻','English Language':'📖','General Knowledge':'🌍','Analytical Reasoning':'🧠','Quantitative Analysis':'📐'};
+var ORDER = ['Computer Awareness','English Language','General Knowledge','Analytical Reasoning','Quantitative Analysis'];
+
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+async function load(subj) {
+  document.getElementById('content').innerHTML = '<div class="st-loading"><div class="st-loader"></div><p>Loading…</p></div>';
+  try {
+    var url = subj === 'all' ? '/study-data?subject=all' : '/study-data?subject=' + encodeURIComponent(subj);
+    var res = await fetch(url);
+    allQ = await res.json();
+    if (!allQ.length) {
+      document.getElementById('content').innerHTML = '<div class="st-empty">⚠️ No questions found.</div>';
+      return;
+    }
+    render(allQ, subj);
+  } catch(e) {
+    document.getElementById('content').innerHTML = '<div class="st-empty">❌ Error loading. Make sure server is running.</div>';
+  }
+}
+
+function render(questions, subj) {
+  var withExpl = questions.filter(function(q){ return q.explanation && q.explanation.trim(); }).length;
+  var hotCount = questions.filter(function(q){ return q.tag === 'hot'; }).length;
+  var html = '';
+
+  html += '<div class="st-stats">';
+  html += '<div class="st-stats-title">' + (subj === 'all' ? 'All Subjects — Complete Q&A' : esc(subj)) + '</div>';
+  html += '<div class="st-stat"><div class="st-stat-num">' + questions.length + '</div><div class="st-stat-lbl">Questions</div></div>';
+  html += '<div class="st-stat-div"></div>';
+  html += '<div class="st-stat"><div class="st-stat-num">' + withExpl + '</div><div class="st-stat-lbl">Explained</div></div>';
+  html += '<div class="st-stat-div"></div>';
+  html += '<div class="st-stat"><div class="st-stat-num">' + hotCount + '</div><div class="st-stat-lbl">Important</div></div>';
+  html += '<div class="st-badge">Study Mode</div>';
+  html += '</div>';
+
+  if (subj === 'all') {
+    var groups = {};
+    ORDER.forEach(function(s){ groups[s] = []; });
+    questions.forEach(function(q){
+      if (!groups[q.subject]) groups[q.subject] = [];
+      groups[q.subject].push(q);
+    });
+    var num = 1;
+    ORDER.forEach(function(s){
+      var qs = groups[s];
+      if (!qs || !qs.length) return;
+      html += renderSection(s, qs, num);
+      num += qs.length;
+    });
+  } else {
+    html += renderSection(subj, questions, 1);
+  }
+
+  document.getElementById('content').innerHTML = html;
+}
+
+function renderSection(subj, qs, startNum) {
+  var icon = ICONS[subj] || '📌';
+  var html = '';
+  html += '<div class="section-group" data-section="' + subj + '">';
+  html += '<div class="section-heading">';
+  html += '<span class="section-icon">' + icon + '</span>';
+  html += '<span class="section-heading-text">' + subj + '</span>';
+  html += '<span class="section-count">' + qs.length + ' Questions</span>';
+  html += '</div>';
+
+  qs.forEach(function(q, i){
+    var opts = [q.option1, q.option2, q.option3, q.option4];
+    var ci = parseInt(q.correct_option) - 1;
+    var cl = LABELS[ci] || 'A';
+    var ct = opts[ci] || '';
+    var isHot = q.tag === 'hot';
+    var qLow = esc(q.question).toLowerCase().replace(/"/g,'');
+
+    html += '<div class="q-card' + (isHot?' hot-q':'') + '" data-text="' + qLow + '">';
+    html += '<div class="q-card-top">';
+    html += '<span class="q-num' + (isHot?' hot':'') + '">' + (startNum+i) + (isHot?' 🔥':'') + '</span>';
+    html += '<div class="q-question">' + esc(q.question) + '</div>';
+    html += '</div>';
+    html += '<div class="q-opts">';
+    opts.forEach(function(opt, j){
+      html += '<div class="q-opt' + (j===ci?' ans':'') + '">';
+      html += '<span class="opt-l">' + LABELS[j] + '</span>';
+      html += '<span>' + esc(opt) + '</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+    html += '<div class="q-answer">';
+    html += '<span class="ans-badge">✅ ' + cl + '. ' + esc(ct) + '</span>';
+    if (q.explanation && q.explanation.trim()) {
+      html += '<div class="expl"><strong>💡</strong> ' + esc(q.explanation) + '</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+  });
+
+  html += '</div>';
+  return html;
+}
+
+function switchSubj(subj, btn) {
+  curSubj = subj;
+  document.querySelectorAll('.subj-tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('search-box').value = '';
+  load(subj);
+}
+
+function filterQ() {
+  var q = document.getElementById('search-box').value.toLowerCase().trim();
+  document.querySelectorAll('.q-card').forEach(function(c){
+    c.style.display = (!q || (c.getAttribute('data-text')||'').includes(q)) ? '' : 'none';
+  });
+  document.querySelectorAll('.section-group').forEach(function(g){
+    var vis = Array.from(g.querySelectorAll('.q-card')).some(function(c){ return c.style.display !== 'none'; });
+    g.style.display = vis ? '' : 'none';
+  });
+}
+
+window.addEventListener('scroll', function(){
+  var b = document.getElementById('scroll-top');
+  if (window.scrollY > 400) b.classList.add('vis'); else b.classList.remove('vis');
+});
+
+load('all');
+</script>
+</body>
+</html>

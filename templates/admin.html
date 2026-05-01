@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Rankora Admin</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>(function(){var t=localStorage.getItem('rankora-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body class="admin-body">
+<div class="admin-page">
+  <div class="admin-topbar">
+    <div class="admin-brand">
+      <div class="admin-brand-icon">🎯</div>
+      <div class="admin-brand-name">Rank<span>ora</span> Admin</div>
+    </div>
+    <a href="/" class="back-link">← Back to App</a>
+  </div>
+
+  <div class="admin-grid">
+    <div class="admin-card span2">
+      <h2>📊 Database Overview</h2>
+      <div class="stat-tiles">
+        <div class="stat-tile"><div class="st-num" id="st-total">—</div><div class="st-lbl">Total Questions</div></div>
+        <div class="stat-tile"><div class="st-num" id="st-tests">—</div><div class="st-lbl">Tests Taken</div></div>
+        <div class="stat-tile"><div class="st-num" id="st-avg">—</div><div class="st-lbl">Avg Score</div></div>
+        <div class="stat-tile"><div class="st-num" id="st-best">—</div><div class="st-lbl">Best Score</div></div>
+      </div>
+    </div>
+    <div class="admin-card">
+      <h2>📚 Questions by Subject</h2>
+      <div id="subj-table"></div>
+    </div>
+    <div class="admin-card">
+      <h2>🚀 Generate Questions</h2>
+      <p class="admin-desc">Auto-generate MCA PGCET MCQs from the question bank and insert into database.</p>
+      <div class="gen-row">
+        <label class="gen-label">Count
+          <input type="number" id="gen-count" value="500" min="50" max="3000" class="gen-input">
+        </label>
+        <button class="btn-gen" onclick="generateQ()">Generate</button>
+      </div>
+      <div id="gen-progress-wrap" style="display:none">
+        <div class="gen-bar-bg"><div class="gen-bar-fill" id="gen-bar"></div></div>
+        <p id="gen-status-text" style="font-size:.75rem;color:var(--dim);margin-top:4px">Generating…</p>
+      </div>
+      <div id="gen-result"></div>
+    </div>
+  </div>
+</div>
+<script>
+async function loadStats(){
+  try{
+    const d = await fetch('/stats').then(r=>r.json());
+    document.getElementById('st-total').textContent = d.total_questions;
+    document.getElementById('st-tests').textContent = d.total_tests;
+    document.getElementById('st-avg').textContent = (d.avg_score||0)+'/100';
+    document.getElementById('st-best').textContent = (d.best_score||0)+'/100';
+    let h='<table class="subj-tbl"><thead><tr><th>Subject</th><th>Questions</th><th>Status</th></tr></thead><tbody>';
+    (d.by_subject||[]).forEach(s=>{
+      const cnt = s.cnt || s.count || 0;
+      const ok = cnt >= 20;
+      h+=`<tr><td>${s.subject}</td><td><strong>${cnt}</strong></td><td>${ok?'<span class="ok-badge">✅ Ready</span>':'<span class="warn-badge">⚠ Need more</span>'}</td></tr>`;
+    });
+    h+='</tbody></table>';
+    document.getElementById('subj-table').innerHTML=h;
+  }catch(e){
+    document.getElementById('subj-table').innerHTML='<p class="err-msg">Cannot connect to server. Make sure Flask is running.</p>';
+  }
+}
+async function generateQ(){
+  const count = document.getElementById('gen-count').value;
+  const wrap = document.getElementById('gen-progress-wrap');
+  const bar = document.getElementById('gen-bar');
+  const txt = document.getElementById('gen-status-text');
+  const res = document.getElementById('gen-result');
+  wrap.style.display='block'; res.innerHTML=''; bar.style.width='5%';
+  let pct=5;
+  const iv = setInterval(()=>{ pct=Math.min(pct+3,90); bar.style.width=pct+'%'; },400);
+  try{
+    const d = await fetch(`/ai-generate?count=${count}`,{method:'POST'}).then(r=>r.json());
+    clearInterval(iv); bar.style.width='100%'; txt.textContent='Done!';
+    res.innerHTML=`<div class="gen-ok">✅ Inserted: <strong>${d.inserted}</strong> | Skipped: <strong>${d.skipped}</strong></div>`;
+    setTimeout(()=>{ wrap.style.display='none'; loadStats(); },1500);
+  }catch(e){
+    clearInterval(iv); wrap.style.display='none';
+    res.innerHTML='<div class="gen-err">❌ Error. Is the server running?</div>';
+  }
+}
+loadStats();
+</script>
+</body>
+</html>

@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>23-Day Study Plan — Rankora PGCET MCA 2026</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+.plan-header{background:linear-gradient(135deg,#1E1B4B,#312E81);padding:20px 20px 0;position:sticky;top:0;z-index:100;}
+.plan-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.plan-brand{font-family:'Sora',sans-serif;font-weight:800;font-size:1rem;color:#fff;}
+.plan-brand em{font-style:normal;color:#A5B4FC;}
+.back-btn{color:#A5B4FC;text-decoration:none;font-size:.75rem;font-weight:600;padding:5px 12px;border:1px solid rgba(165,180,252,.3);border-radius:20px;}
+.plan-title{font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:800;color:#fff;margin-bottom:2px;}
+.plan-sub{font-size:.72rem;color:rgba(255,255,255,.5);margin-bottom:8px;}
+.exam-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(244,63,94,.2);border:1px solid rgba(244,63,94,.3);color:#FDA4AF;font-size:.62rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:10px;}
+.tabs{display:flex;gap:5px;flex-wrap:wrap;padding:10px 0 0;}
+.tab{padding:7px 13px;border-radius:20px 20px 0 0;font-size:.7rem;font-weight:700;cursor:pointer;border:none;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);font-family:'Inter',sans-serif;transition:all .2s;}
+.tab.active{background:#fff;color:#312E81;}
+.tab:hover:not(.active){background:rgba(255,255,255,.2);color:#fff;}
+.content{max-width:800px;margin:0 auto;padding:18px 14px 60px;}
+.section{display:none;}.section.active{display:block;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+.card-title{font-family:'Sora',sans-serif;font-weight:700;font-size:.88rem;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.phase-badge{font-size:.6rem;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;}
+.ph1{background:rgba(99,102,241,.1);color:#6366F1;border:1px solid rgba(99,102,241,.2);}
+.ph2{background:rgba(244,63,94,.1);color:#F43F5E;border:1px solid rgba(244,63,94,.2);}
+.ph3{background:rgba(245,158,11,.1);color:#F59E0B;border:1px solid rgba(245,158,11,.2);}
+.ph4{background:rgba(34,197,94,.1);color:#22C55E;border:1px solid rgba(34,197,94,.2);}
+/* Day rows */
+.day-row{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);}
+.day-row:last-child{border-bottom:none;}
+.day-badge{min-width:46px;font-family:'Sora',sans-serif;font-weight:800;font-size:.78rem;color:var(--p);padding-top:2px;flex-shrink:0;}
+.day-info{flex:1;}
+.day-topic{font-weight:700;font-size:.82rem;color:var(--text);margin-bottom:2px;}
+.day-desc{font-size:.7rem;color:var(--text3);line-height:1.5;}
+.day-actions{display:flex;flex-direction:column;gap:5px;flex-shrink:0;align-items:flex-end;}
+.btn-practice{background:var(--p);color:#fff;border:none;border-radius:8px;padding:7px 13px;font-size:.72rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;white-space:nowrap;}
+.btn-practice:hover{background:var(--p2);transform:translateY(-1px);}
+.btn-practice.green{background:#16A34A;}
+.btn-practice.green:hover{background:#15803D;}
+.btn-practice.orange{background:#D97706;}
+.btn-practice.orange:hover{background:#B45309;}
+.btn-study-link{color:var(--teal);font-size:.65rem;font-weight:600;text-decoration:none;text-align:center;}
+.btn-study-link:hover{text-decoration:underline;}
+/* Score grid */
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+.score-tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
+.score-tile-num{font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:800;color:var(--p);}
+.score-tile-lbl{font-size:.6rem;color:var(--text3);margin-top:3px;}
+.highlight{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:10px 13px;font-size:.74rem;color:var(--text2);line-height:1.6;margin-bottom:10px;}
+.highlight strong{color:#D97706;}
+/* Topics */
+.tip-list{list-style:none;padding:0;margin:0;}
+.tip-list li{font-size:.75rem;color:var(--text2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;line-height:1.5;}
+.tip-list li:last-child{border-bottom:none;}
+.tip-list li::before{content:"→";color:var(--p);font-weight:700;flex-shrink:0;}
+.tip-box{background:rgba(99,102,241,.05);border:1px solid rgba(99,102,241,.15);border-radius:10px;padding:12px 14px;margin-bottom:10px;}
+.tip-title{font-family:'Sora',sans-serif;font-weight:700;font-size:.76rem;color:var(--p);margin-bottom:8px;}
+.trick-box{background:var(--bg2);border-radius:8px;padding:11px 13px;margin-bottom:8px;border-left:3px solid var(--p);font-family:'Courier New',monospace;font-size:.7rem;color:var(--text);line-height:1.8;white-space:pre-wrap;}
+[data-theme="dark"] .trick-box{background:rgba(255,255,255,.04);}
+/* Repeated table */
+.rep-table{width:100%;border-collapse:collapse;font-size:.74rem;}
+.rep-table th{background:var(--bg2);padding:8px 10px;text-align:left;font-weight:700;font-size:.63rem;text-transform:uppercase;color:var(--text3);border-bottom:2px solid var(--border);}
+.rep-table td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.5;}
+.rep-table tr:last-child td{border-bottom:none;}
+.rep-table tr:hover td{background:var(--bg2);}
+/* Routine */
+.routine-step{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);}
+.routine-step:last-child{border-bottom:none;}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--p);color:#fff;font-family:'Sora',sans-serif;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-body{flex:1;}
+.step-title{font-weight:700;font-size:.82rem;color:var(--text);margin-bottom:4px;}
+.step-desc{font-size:.73rem;color:var(--text3);line-height:1.6;}
+/* Quiz overlay */
+.quiz-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+.quiz-overlay.open{display:flex;}
+.quiz-box{background:var(--surface);border-radius:16px;width:min(96vw,700px);height:min(92vh,700px);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4);border:1px solid var(--border);}
+.quiz-header{background:linear-gradient(135deg,#1E1B4B,#312E81);padding:14px 18px;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:space-between;}
+.quiz-header-title{font-family:'Sora',sans-serif;font-weight:800;font-size:.9rem;color:#fff;}
+.quiz-close{background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;}
+.quiz-body{padding:16px;overflow-y:auto;flex:1;}
+.quiz-meta{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.quiz-meta-chip{font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--p3);color:var(--p2);border:1px solid var(--p4);}.hot-chip{background:rgba(245,158,11,.1)!important;color:#D97706!important;border-color:rgba(245,158,11,.2)!important;}
+[data-theme="dark"] .quiz-meta-chip{background:rgba(99,102,241,.15);color:#A5B4FC;}
+.quiz-progress{height:4px;background:var(--border);border-radius:2px;margin-bottom:16px;}
+.quiz-progress-fill{height:100%;background:linear-gradient(90deg,var(--p),#22C55E);border-radius:2px;transition:width .3s;}
+.qz-num{font-family:'Sora',sans-serif;font-weight:700;font-size:.7rem;color:var(--p);margin-bottom:6px;}
+.qz-text{font-size:.88rem;font-weight:600;color:var(--text);line-height:1.65;margin-bottom:14px;background:var(--bg2);padding:13px 15px;border-radius:10px;border:1px solid var(--border);word-break:break-word;white-space:normal;}
+.qz-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;}
+.qz-opt{display:flex;align-items:center;gap:10px;padding:10px 13px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;background:var(--surface);}
+.qz-opt:hover{border-color:var(--p4);background:var(--p3);}
+[data-theme="dark"] .qz-opt:hover{background:rgba(99,102,241,.08);}
+.qz-opt.selected{border-color:var(--p);background:var(--p3);}
+[data-theme="dark"] .qz-opt.selected{background:rgba(99,102,241,.12);}
+.qz-opt.correct{border-color:#22C55E;background:rgba(34,197,94,.08);}
+.qz-opt.wrong{border-color:#F43F5E;background:rgba(244,63,94,.06);}
+.qz-lbl{width:26px;height:26px;border-radius:50%;background:var(--bg2);border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:.68rem;color:var(--text3);flex-shrink:0;}
+.qz-opt.selected .qz-lbl{background:var(--p);border-color:var(--p);color:#fff;}
+.qz-opt.correct .qz-lbl{background:#22C55E;border-color:#22C55E;color:#fff;}
+.qz-opt.wrong .qz-lbl{background:#F43F5E;border-color:#F43F5E;color:#fff;}
+.qz-opt-text{font-size:.82rem;color:var(--text);}
+.qz-expl{background:rgba(99,102,241,.07);border-left:3px solid var(--p);border-radius:0 8px 8px 0;padding:9px 12px;font-size:.73rem;color:var(--text2);line-height:1.6;margin-bottom:12px;display:none;}
+[data-theme="dark"] .qz-expl{background:rgba(99,102,241,.1);}
+.qz-expl.show{display:block;}
+.qz-nav{display:flex;gap:8px;}
+.qz-btn{flex:1;padding:10px;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;border:none;}
+.qz-btn-submit{background:var(--p);color:#fff;}
+.qz-btn-submit:hover{background:var(--p2);}
+.qz-btn-next{background:#22C55E;color:#fff;}
+.qz-btn-next:hover{background:#16A34A;}
+.qz-btn-skip{background:var(--bg2);color:var(--text3);border:1px solid var(--border);}
+.qz-btn-skip:hover{background:var(--border);}
+.qz-result{text-align:center;padding:20px 10px;}
+.qz-result-score{font-family:'Sora',sans-serif;font-size:3rem;font-weight:800;color:var(--p);}
+.qz-result-lbl{font-size:.75rem;color:var(--text3);margin-bottom:16px;}
+.qz-result-msg{font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:20px;}
+.qz-result-btns{display:flex;gap:8px;justify-content:center;}
+.qz-result-btn{padding:10px 22px;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;border:none;}
+.loading-qs{text-align:center;padding:40px;color:var(--text3);font-size:.85rem;}
+.load-spin{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--p);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+@media(max-width:600px){.day-row{flex-wrap:wrap;}.day-actions{flex-direction:row;width:100%;}.score-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+<script>(function(){var t=localStorage.getItem('rankora-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+<!-- HEADER -->
+<div class="plan-header">
+  <div class="plan-header-top">
+    <div class="plan-brand">Rank<em>ora</em> — Study Plan</div>
+    <a href="/" class="back-btn">← Home</a>
+  </div>
+  <div class="plan-title">🗓️ 23-Day PGCET MCA Plan</div>
+  <div class="plan-sub">BCA Student · &lt;1 Hour/Day · Target: 70+/100 Marks</div>
+  <div class="exam-chip">📋 No Negative Marking · Attempt ALL Questions · Karnataka PGCET MCA 2026</div>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('plan',this)">📅 Day Plan</button>
+    <button class="tab" onclick="showTab('topics',this)">🎯 Top Topics</button>
+    <button class="tab" onclick="showTab('tricks',this)">⚡ Shortcuts</button>
+    <button class="tab" onclick="showTab('repeated',this)">🔁 Repeated Qs</button>
+    <button class="tab" onclick="showTab('routine',this)">📱 Routine</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ═══ TAB 1: DAY PLAN ═══ -->
+<div id="tab-plan" class="section active">
+
+<div class="card">
+  <div class="card-title">📊 Score Strategy <span class="phase-badge ph4">Target 70+/100</span></div>
+  <div class="score-grid">
+    <div class="score-tile"><div class="score-tile-num">15/20</div><div class="score-tile-lbl">💻 Computer Awareness</div></div>
+    <div class="score-tile"><div class="score-tile-num">13/20</div><div class="score-tile-lbl">�� Quantitative</div></div>
+    <div class="score-tile"><div class="score-tile-num">14/20</div><div class="score-tile-lbl">🧠 Reasoning</div></div>
+    <div class="score-tile"><div class="score-tile-num">14/20</div><div class="score-tile-lbl">📖 English</div></div>
+    <div class="score-tile"><div class="score-tile-num">14/20</div><div class="score-tile-lbl">🌍 GK</div></div>
+    <div class="score-tile"><div class="score-tile-num" style="color:#22C55E">70/100</div><div class="score-tile-lbl">🏆 Total Target</div></div>
+  </div>
+  <div class="highlight"><strong>⚠️ Key Rule:</strong> No negative marking — NEVER leave any question blank. Guess if needed. Every blank = free mark lost.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Phase 1 — Days 1–8 <span class="phase-badge ph1">💻 Computer Awareness</span></div>
+  <div class="day-row">
+    <div class="day-badge">Day 1</div>
+    <div class="day-info"><div class="day-topic">Number Systems</div><div class="day-desc">Binary↔Decimal↔Hex↔Octal conversions, 1s complement, 2s complement</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(1,'Number Systems','Computer Awareness')">▶ Practice Now</button><a href="/study" class="btn-study-link">📖 Study first</a></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 2</div>
+    <div class="day-info"><div class="day-topic">Logic Gates</div><div class="day-desc">AND OR NOT NAND NOR XOR truth tables, De Morgan's laws, universal gates</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(2,'Logic Gates','Computer Awareness')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 3</div>
+    <div class="day-info"><div class="day-topic">Memory &amp; Storage</div><div class="day-desc">RAM ROM Cache Virtual memory, KB→MB→GB hierarchy, volatile vs non-volatile</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(3,'Memory','Computer Awareness')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 4</div>
+    <div class="day-info"><div class="day-topic">OS Basics</div><div class="day-desc">Process/thread, deadlock (4 Coffman conditions), paging, SJF/FCFS/RR scheduling</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(4,'OS Basics','Computer Awareness')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 5</div>
+    <div class="day-info"><div class="day-topic">Networking</div><div class="day-desc">OSI 7 layers, TCP vs UDP, HTTP=80 HTTPS=443, DNS, DHCP, MAC address, router vs switch</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(5,'Networking','Computer Awareness')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 6</div>
+    <div class="day-info"><div class="day-topic">DBMS &amp; SQL</div><div class="day-desc">ACID, 1NF/2NF/3NF, Primary/Foreign key, SELECT JOIN GROUP BY HAVING, normalization</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(6,'DBMS','Computer Awareness')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 7</div>
+    <div class="day-info"><div class="day-topic">Data Structures &amp; Algorithms</div><div class="day-desc">Stack(LIFO) Queue(FIFO), time complexities, BFS/DFS, sorting: Merge O(n log n) Bubble O(n²)</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(7,'DS & Algorithms','Computer Awareness')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 8</div>
+    <div class="day-info"><div class="day-topic">CA Full Revision</div><div class="day-desc">All abbreviations + mixed CA questions. Note every wrong answer in notebook.</div></div>
+    <div class="day-actions"><button class="btn-practice green" onclick="startDayPractice(8,'CA Revision','Computer Awareness')">▶ Practice Now</button></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Phase 2 — Days 9–16 <span class="phase-badge ph2">📐 QA + 🧠 Reasoning (40 marks)</span></div>
+  <div class="day-row">
+    <div class="day-badge">Day 9</div>
+    <div class="day-info"><div class="day-topic">QA: Arithmetic</div><div class="day-desc">Percentages, profit/loss, ratio/proportion, LCM/HCF shortcuts</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(9,'Arithmetic','Quantitative Analysis')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 10</div>
+    <div class="day-info"><div class="day-topic">QA: Algebra &amp; Logs</div><div class="day-desc">Quadratic formula, log rules: log(ab)=log a+log b, AP/GP nth term and sum formulas</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(10,'Algebra & Logs','Quantitative Analysis')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 11</div>
+    <div class="day-info"><div class="day-topic">QA: Trig + Sets + P&amp;C</div><div class="day-desc">Trig table (0°30°45°60°90°), sets union/intersection, nPr nCr formulas</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(11,'Trig & Sets','Quantitative Analysis')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 12</div>
+    <div class="day-info"><div class="day-topic">QA: Stats &amp; Probability</div><div class="day-desc">Mean/Median/Mode, P(A)=favorable/total, P(A)+P(A')=1, variance, standard deviation</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(12,'Probability','Quantitative Analysis')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 13</div>
+    <div class="day-info"><div class="day-topic">AR: Series &amp; Patterns</div><div class="day-desc">Number series (differences/squares/cubes/Fibonacci), letter series, odd one out</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(13,'Series','Analytical Reasoning')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 14</div>
+    <div class="day-info"><div class="day-topic">AR: Coding-Decoding</div><div class="day-desc">Letter shift (+1/+2), reverse alphabet (A=Z), number codes (A=1 B=2...Z=26)</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(14,'Coding','Analytical Reasoning')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 15</div>
+    <div class="day-info"><div class="day-topic">AR: Analogy + Logic</div><div class="day-desc">Analogy pairs, syllogisms, blood relations, direction sense, ranking formula</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(15,'Analogy','Analytical Reasoning')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 16</div>
+    <div class="day-info"><div class="day-topic">QA + AR Revision</div><div class="day-desc">Mixed QA and AR questions. Review all wrong answers from Days 9–15.</div></div>
+    <div class="day-actions"><button class="btn-practice green" onclick="startDayPractice(16,'QA Revision','Quantitative Analysis')">▶ Practice Now</button></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Phase 3 — Days 17–21 <span class="phase-badge ph3">📖 English + 🌍 GK (40 marks)</span></div>
+  <div class="day-row">
+    <div class="day-badge">Day 17</div>
+    <div class="day-info"><div class="day-topic">English: Vocabulary</div><div class="day-desc">Synonyms/antonyms: Abundant=Plentiful, Benevolent=Kind, Candid=Frank, Diligent=Hardworking</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(17,'Vocabulary','English Language')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 18</div>
+    <div class="day-info"><div class="day-topic">English: Grammar</div><div class="day-desc">Tenses, subject-verb agreement (Neither=singular), articles (an before vowel sound), prepositions</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(18,'Grammar','English Language')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 19</div>
+    <div class="day-info"><div class="day-topic">English: Idioms + Usage</div><div class="day-desc">Top 10 idioms, one-word substitution (Omniscient/Incorrigible), error spotting, passive voice</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(19,'Idioms','English Language')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 20</div>
+    <div class="day-info"><div class="day-topic">GK: India</div><div class="day-desc">Independence=15 Aug 1947, Constitution=26 Jan 1950, Ambedkar, national symbols, ISRO, PM/President</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(20,'India GK','General Knowledge')">▶ Practice Now</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 21</div>
+    <div class="day-info"><div class="day-topic">GK: Tech + World</div><div class="day-desc">Tech founders (Google/Facebook/Microsoft/Apple), inventions, world geography, science facts</div></div>
+    <div class="day-actions"><button class="btn-practice" onclick="startDayPractice(21,'Tech GK','General Knowledge')">▶ Practice Now</button></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Phase 4 — Days 22–23 <span class="phase-badge ph4">🏆 Final Revision</span></div>
+  <div class="day-row">
+    <div class="day-badge">Day 22</div>
+    <div class="day-info"><div class="day-topic">Full Mock Test</div><div class="day-desc">100 questions, 120 minutes. Strict timing. Review section-wise score after.</div></div>
+    <div class="day-actions"><button class="btn-practice green" onclick="window.location.href='/?mock=1'">▶ Full Mock</button></div>
+  </div>
+  <div class="day-row">
+    <div class="day-badge">Day 23</div>
+    <div class="day-info"><div class="day-topic">Wrong Answer Review Only</div><div class="day-desc">Read your notes. Review only questions you got wrong. Sleep early. No new topics.</div></div>
+    <div class="day-actions"><button class="btn-practice orange" onclick="startDayPractice(23,'Final Review','all')">▶ Important Qs</button></div>
+  </div>
+</div>
+
+</div><!-- end tab-plan -->
+<!-- ═══ TAB 2: TOPICS ═══ -->
+<div id="tab-topics" class="section">
+<div class="card"><div class="card-title">💻 Computer Awareness — Top 10 Topics</div><ul class="tip-list">
+<li>Number system conversions (Binary↔Hex↔Octal↔Decimal) — <strong>3-4 questions guaranteed every year</strong></li>
+<li>Logic gates truth tables + De Morgan's laws (NAND/NOR = universal gates)</li>
+<li>RAM vs ROM vs Cache vs Virtual memory — speed hierarchy: Cache > RAM > ROM > HDD</li>
+<li>OSI model 7 layers — mnemonic: "Please Do Not Throw Sausage Pizza Away"</li>
+<li>TCP vs UDP, HTTP=port 80, HTTPS=port 443, FTP=21, SMTP=25, DNS, DHCP</li>
+<li>DBMS: ACID properties, normalization 1NF/2NF/3NF, Primary key vs Foreign key</li>
+<li>Data structures: Stack(LIFO), Queue(FIFO), time complexities — Merge/Heap/Quick = O(n log n)</li>
+<li>OS: Deadlock (4 Coffman conditions), SJF scheduling, paging vs segmentation, thrashing</li>
+<li>OOP: Encapsulation, Inheritance, Polymorphism, Abstraction — definitions</li>
+<li>Full forms: CPU ALU RAM ROM URL HTML CSS API GUI CLI USB PDF BIOS SDLC IDE</li>
+</ul></div>
+<div class="card"><div class="card-title">📐 Quantitative Analysis — Top 10 Topics</div><ul class="tip-list">
+<li>Logarithm rules: log(ab)=log a+log b, log(a/b)=log a-log b, log(aⁿ)=n·log a, log(1)=0</li>
+<li>Trigonometry: sin/cos/tan values for 0°,30°,45°,60°,90° — memorize the table once</li>
+<li>Permutation nPr = n!/(n-r)! and Combination nCr = n!/(r!(n-r)!) — "arrange"=P, "choose"=C</li>
+<li>Probability: P(A)=favorable/total, P(A)+P(A')=1, P(impossible)=0, P(certain)=1</li>
+<li>Sets: n(A∪B) = n(A)+n(B)-n(A∩B), number of subsets = 2ⁿ</li>
+<li>AP: nth term = a+(n-1)d, Sum = n/2·(2a+(n-1)d)</li>
+<li>Statistics: Mean=sum/n, Median=middle value, Mode=most frequent, Range=max-min</li>
+<li>Quadratic formula: x = (-b ± √(b²-4ac)) / 2a, Discriminant D=b²-4ac</li>
+<li>Geometry: Area circle=πr², triangle=(1/2)bh, Pythagoras a²+b²=c²</li>
+<li>Sum of first n natural numbers = n(n+1)/2, Sum of squares = n(n+1)(2n+1)/6</li>
+</ul></div>
+<div class="card"><div class="card-title">🧠 Analytical Reasoning — Top 10 Topics</div><ul class="tip-list">
+<li>Number series — check differences first, then ratios, then squares/cubes/Fibonacci</li>
+<li>Letter series — alternate letters, reverse alphabet (A=Z, B=Y, A+Z=27)</li>
+<li>Coding-decoding — letter shift (+1/+2), number codes (A=1, B=2...Z=26)</li>
+<li>Analogy — Doctor:Hospital, Fish:Water, Book:Library type pairs</li>
+<li>Odd one out — 2D vs 3D shapes, prime vs composite, mammals vs birds</li>
+<li>Blood relations — draw family tree, Mother's brother=Uncle, Sibling's child=Nephew/Niece</li>
+<li>Ranking — Position from right = (Total+1) - Position from left</li>
+<li>Direction sense — North/South/East/West turns, final direction after multiple turns</li>
+<li>Syllogisms — All A are B + Some B are C → Some A may be C</li>
+<li>Clock problems — Angle = |30H - 5.5M| degrees</li>
+</ul></div>
+<div class="card"><div class="card-title">📖 English Language — Top 10 Topics</div><ul class="tip-list">
+<li>Synonyms: Abundant=Plentiful, Benevolent=Kind, Candid=Frank, Diligent=Hardworking, Eloquent=Fluent</li>
+<li>Antonyms: Ancient↔Modern, Courage↔Cowardice, Genuine↔Fake, Humble↔Arrogant, Transparent↔Opaque</li>
+<li>Subject-verb agreement — Neither/Either/Each/Everyone takes SINGULAR verb</li>
+<li>Tenses — "yesterday" needs simple past, "since/for" needs present perfect</li>
+<li>Articles — "an" before vowel SOUND (an honest man, an hour, an MBA)</li>
+<li>Prepositions — good AT, arrive ON Monday, interested IN, afraid OF</li>
+<li>Idioms: Break the ice=start conversation, Bite the bullet=endure bravely, Burn midnight oil=work late</li>
+<li>One-word substitution: Omniscient=knows everything, Incorrigible=cannot be corrected</li>
+<li>Error spotting — double comparative (more smarter→smarter), wrong tense with time words</li>
+<li>Passive voice — Active: She writes a letter → Passive: A letter is written by her</li>
+</ul></div>
+<div class="card"><div class="card-title">🌍 General Knowledge — Top 10 Topics</div><ul class="tip-list">
+<li>Tech founders: Google=Larry Page+Sergey Brin, Facebook=Zuckerberg, Microsoft=Bill Gates+Paul Allen</li>
+<li>Computer inventors: WWW=Tim Berners-Lee (1989), Telephone=Graham Bell, Father of Computer=Charles Babbage</li>
+<li>India: Independence=15 Aug 1947, Constitution=26 Jan 1950, Father of Constitution=B.R. Ambedkar</li>
+<li>National symbols: Animal=Bengal Tiger, Bird=Peacock, Anthem=Jana Gana Mana (Tagore)</li>
+<li>Current India: President=Droupadi Murmu (15th, since July 2022), PM=Narendra Modi</li>
+<li>ISRO=Indian Space Research Organisation (Bengaluru), NASA=National Aeronautics and Space Administration</li>
+<li>World geography: Largest continent=Asia, Longest river=Nile (6650km), Highest peak=Mount Everest</li>
+<li>Science: Speed of light=3×10⁸ m/s, Water=H₂O, e=2.718, π=3.14159</li>
+<li>Full forms: AI=Artificial Intelligence, IoT=Internet of Things, WHO=World Health Organisation</li>
+<li>Awards: Nobel Prize categories, Bharat Ratna=highest civilian award in India</li>
+</ul></div>
+</div>
+
+<!-- ═══ TAB 3: SHORTCUTS ═══ -->
+<div id="tab-tricks" class="section">
+<div class="card"><div class="card-title">📐 QA Shortcuts</div>
+<div class="tip-box"><div class="tip-title">TRIG TABLE — Memorize Once</div>
+<div class="trick-box">       0°    30°    45°    60°    90°
+sin    0    1/2   1/√2   √3/2    1
+cos    1   √3/2  1/√2   1/2     0
+tan    0   1/√3   1      √3     ∞
+TRICK: sin row = √0/2, √1/2, √2/2, √3/2, √4/2
+       cos row = sin in REVERSE order</div></div>
+<div class="tip-box"><div class="tip-title">LOG SHORTCUTS</div>
+<div class="trick-box">log(1)=0  log(10)=1  log(2)≈0.301  log(3)≈0.477  log(5)≈0.699
+log(aⁿ)=n·log(a)   log(ab)=log(a)+log(b)   log(a/b)=log(a)-log(b)</div></div>
+<div class="tip-box"><div class="tip-title">PERMUTATION vs COMBINATION</div>
+<div class="trick-box">See "ARRANGE/ORDER/RANK" → Permutation nPr = n!/(n-r)!
+See "SELECT/CHOOSE/PICK" → Combination nCr = n!/(r!×(n-r)!)
+5P2 = 5×4 = 20       5C2 = 5×4/2×1 = 10</div></div>
+<div class="tip-box"><div class="tip-title">PERCENTAGE SHORTCUTS</div>
+<div class="trick-box">10% of X = X/10    5% = half of 10%    25% = X/4    33.33% = X/3</div></div>
+</div>
+<div class="card"><div class="card-title">🧠 Reasoning Shortcuts</div>
+<div class="tip-box"><div class="tip-title">NUMBER SERIES METHOD</div>
+<div class="trick-box">Step 1: Find differences (D1, D2, D3...)
+Step 2: Equal differences → AP series
+Step 3: Differences increasing by same amount → quadratic
+Step 4: Check squares: 1,4,9,16,25,36...
+Step 5: Check cubes: 1,8,27,64,125...
+Step 6: Check Fibonacci: each = sum of previous two
+Step 7: Check doubling/halving</div></div>
+<div class="tip-box"><div class="tip-title">CLOCK ANGLE FORMULA</div>
+<div class="trick-box">Angle = |30H - 5.5M|
+At 3:00 → |90 - 0| = 90°    At 6:30 → |180 - 165| = 15°</div></div>
+<div class="tip-box"><div class="tip-title">RANKING TRICK</div>
+<div class="trick-box">Position from right = (Total + 1) - Position from left
+8th from left in 20 students = 20+1-8 = 13th from right</div></div>
+<div class="tip-box"><div class="tip-title">CODING-DECODING</div>
+<div class="trick-box">Type 1 — Letter Shift: A→C means +2, apply same shift to all
+Type 2 — Reverse: A=Z, B=Y (use formula: 27 - position)
+Type 3 — Number: A=1, B=2 ... Z=26</div></div>
+</div>
+</div>
+
+<!-- ═══ TAB 4: REPEATED ═══ -->
+<div id="tab-repeated" class="section">
+<div class="card"><div class="card-title">🔁 Most Repeated PGCET Question Types</div>
+<table class="rep-table">
+<tr><th>Question Type</th><th>Tip to Solve Fast</th></tr>
+<tr><td><strong>Binary↔Decimal conversion</strong></td><td>Memorize powers of 2: 1,2,4,8,16,32,64,128,256</td></tr>
+<tr><td><strong>Stack=LIFO / Queue=FIFO</strong></td><td>Stack=plates stacked, Queue=ticket line</td></tr>
+<tr><td><strong>SQL Primary/Foreign key</strong></td><td>Primary=unique+NOT NULL, Foreign=reference to another table</td></tr>
+<tr><td><strong>Normalization 2NF/3NF</strong></td><td>2NF=no partial dependency, 3NF=no transitive dependency</td></tr>
+<tr><td><strong>OSI layer functions</strong></td><td>"Please Do Not Throw Sausage Pizza Away" (Physical→Application)</td></tr>
+<tr><td><strong>Sorting time complexities</strong></td><td>Merge/Heap/Quick=O(n log n). Bubble/Selection/Insertion=O(n²)</td></tr>
+<tr><td><strong>Number series</strong></td><td>Check differences first, then squares/cubes/Fibonacci</td></tr>
+<tr><td><strong>Synonym/Antonym</strong></td><td>Abundant=Plentiful, Benevolent=Kind, Candid=Frank, Diligent=Hardworking</td></tr>
+<tr><td><strong>Probability basics</strong></td><td>P=favorable/total, always 0 to 1, P(A)+P(A')=1</td></tr>
+<tr><td><strong>India GK dates</strong></td><td>15 Aug 1947, 26 Jan 1950, Ambedkar, Tiger, Peacock, Tagore</td></tr>
+<tr><td><strong>Logic gates</strong></td><td>NAND/NOR=universal gates. XOR: same inputs=0, different=1</td></tr>
+<tr><td><strong>RAM vs ROM vs Cache</strong></td><td>Speed: Cache > RAM > ROM > HDD. RAM=volatile, ROM=non-volatile</td></tr>
+<tr><td><strong>Coding-decoding</strong></td><td>Find shift from first example, apply same to all letters</td></tr>
+<tr><td><strong>Preposition usage</strong></td><td>Good AT, arrive ON (day), interested IN, afraid OF</td></tr>
+<tr><td><strong>Tech founders GK</strong></td><td>Google=Page+Brin, Facebook=Zuckerberg, WWW=Tim Berners-Lee</td></tr>
+</table></div>
+<div class="card"><div class="card-title">⭐ Sure-Shot Topics — Every PGCET MCA Paper</div><ul class="tip-list">
+<li><strong>Binary number system</strong> — at least 2 conversion questions guaranteed</li>
+<li><strong>Stack and Queue</strong> — LIFO/FIFO definition or application question</li>
+<li><strong>OSI model</strong> — which layer does what (routing=Network, MAC=DataLink)</li>
+<li><strong>SQL basics</strong> — Primary key, Foreign key, or normalization</li>
+<li><strong>Sorting complexity</strong> — Merge sort O(n log n) vs Bubble sort O(n²)</li>
+<li><strong>Probability</strong> — coin toss, dice, or basic P=favorable/total</li>
+<li><strong>Trig values</strong> — sin/cos/tan of standard angles (30°,45°,60°,90°)</li>
+<li><strong>India independence/constitution dates</strong> — 15 Aug 1947, 26 Jan 1950</li>
+<li><strong>Synonym or antonym</strong> — at least 3-4 vocab questions per paper</li>
+<li><strong>Number series</strong> — at least 2-3 series questions in reasoning</li>
+</ul></div>
+</div>
+
+<!-- ═══ TAB 5: ROUTINE ═══ -->
+<div id="tab-routine" class="section">
+<div class="card"><div class="card-title">📱 Daily 3-Step Routine (50 min total)</div>
+<div class="routine-step"><div class="step-num">1</div><div class="step-body"><div class="step-title">LEARN — 10 Minutes</div><div class="step-desc">Read today's topic from the Top Topics tab. No YouTube. Write 3 key facts you must remember. Focus on formulas and mnemonics only.</div></div></div>
+<div class="routine-step"><div class="step-num">2</div><div class="step-body"><div class="step-title">PRACTICE — 30 Minutes</div><div class="step-desc">Click <strong>▶ Practice Now</strong> on today's day row in the Day Plan tab. Attempt all 20 questions. Never skip — no negative marking means always guess. The quiz shows correct answer + explanation after each question.</div></div></div>
+<div class="routine-step"><div class="step-num">3</div><div class="step-body"><div class="step-title">REVIEW — 10 Minutes</div><div class="step-desc">After finishing, note every wrong answer in a notebook (1 line each: question + correct answer). This notebook = your Day 22-23 revision material. Don't skip this step.</div></div></div>
+</div>
+<div class="card"><div class="card-title">⚡ Exam Day Strategy — Karnataka PGCET MCA 2026</div><ul class="tip-list">
+<li><strong>Attempt order:</strong> Computer Awareness first → GK → English → Reasoning → Quantitative last</li>
+<li><strong>Time per question:</strong> 72 seconds average. Stuck after 30 sec → mark and move on</li>
+<li><strong>No negative marking:</strong> Fill EVERY bubble. Never leave blank. Guess from 2 options if unsure</li>
+<li><strong>Elimination method:</strong> Cross out 2 obviously wrong options → 50% chance on remaining 2</li>
+<li><strong>Computer Awareness:</strong> Target 15+ marks — strongest section for BCA student</li>
+<li><strong>Quantitative:</strong> Do formula-based questions first, skip word problems if taking too long</li>
+<li><strong>Reasoning series:</strong> Pattern not found in 30 sec → check if squares or Fibonacci</li>
+<li><strong>Last 10 min:</strong> Check palette for unanswered questions and fill any blanks</li>
+</ul></div>
+</div>
+
+</div><!-- end content -->
+
+<!-- ═══ QUIZ OVERLAY ═══ -->
+<div id="quiz-overlay" class="quiz-overlay">
+  <div class="quiz-box">
+    <div class="quiz-header">
+      <div class="quiz-header-title" id="quiz-title">Practice Quiz</div>
+      <button class="quiz-close" onclick="closeQuiz()">✕</button>
+    </div>
+    <div class="quiz-body" id="quiz-body">
+      <div class="loading-qs"><div class="load-spin"></div>Loading questions…</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(name, btn) {
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  document.getElementById('tab-' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ── QUIZ STATE ──
+var qzQuestions = [], qzIdx = 0, qzScore = 0, qzAnswered = false;
+var qzDayNum = 1, qzTopicName = '', qzSubject = '';
+
+async function startDayPractice(day, topic, subject) {
+  qzDayNum = day; qzTopicName = topic; qzSubject = subject;
+  qzQuestions = []; qzIdx = 0; qzScore = 0; qzAnswered = false;
+  document.getElementById('quiz-title').textContent = 'Day ' + day + ' — ' + topic;
+  document.getElementById('quiz-body').innerHTML = '<div class="loading-qs"><div class="load-spin"></div>Loading questions…</div>';
+  document.getElementById('quiz-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  try {
+    var url = subject === 'all' ? '/important' : '/practice-day?day=' + day;
+    var res = await fetch(url);
+    if (!res.ok) throw new Error('Server error ' + res.status);
+    var data = await res.json();
+    if (!data || !data.length) throw new Error('No questions found for this topic');
+    qzQuestions = data;
+    renderQz();
+  } catch(e) {
+    document.getElementById('quiz-body').innerHTML = '<div class="loading-qs">❌ ' + e.message + '<br><br><small>Make sure Flask server is running on port 5000</small></div>';
+  }
+}
+
+function closeQuiz() {
+  document.getElementById('quiz-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function renderQz() {
+  if (qzIdx >= qzQuestions.length) { showQzResult(); return; }
+  var q = qzQuestions[qzIdx];
+  var opts = [q.option1, q.option2, q.option3, q.option4];
+  var labels = ['A','B','C','D'];
+  var correctIdx = parseInt(q.correct_option) - 1;
+  var pct = Math.round((qzIdx / qzQuestions.length) * 100);
+  qzAnswered = false;
+
+  var html = '';
+  html += '<div class="quiz-meta">';
+  html += '<span class="quiz-meta-chip">Q ' + (qzIdx+1) + ' / ' + qzQuestions.length + '</span>';
+  html += '<span class="quiz-meta-chip">' + esc(q.subject || qzSubject) + '</span>';
+  if (q.tag === 'hot') html += '<span class="quiz-meta-chip hot-chip">🔥 Sure Shot</span>';
+  html += '</div>';
+  html += '<div class="quiz-progress"><div class="quiz-progress-fill" style="width:' + pct + '%"></div></div>';
+  html += '<div class="qz-text">' + esc(q.question) + '</div>';
+  html += '<div class="qz-opts" id="qz-opts">';
+  opts.forEach(function(opt, i) {
+    html += '<div class="qz-opt" id="qz-opt-' + i + '" data-idx="' + i + '">';
+    html += '<div class="qz-lbl">' + labels[i] + '</div>';
+    html += '<div class="qz-opt-text">' + esc(opt) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '<div class="qz-expl" id="qz-expl"></div>';
+  html += '<div class="qz-nav">';
+  html += '<button class="qz-btn qz-btn-skip" id="qz-skip-btn" onclick="skipQz()">Skip →</button>';
+  html += '<button class="qz-btn qz-btn-next" id="qz-next-btn" style="display:none" onclick="nextQz()">';
+  html += (qzIdx < qzQuestions.length - 1) ? 'Next →' : 'See Results';
+  html += '</button>';
+  html += '</div>';
+
+  document.getElementById('quiz-body').innerHTML = html;
+
+  // Attach click handlers AFTER rendering - use IIFE to capture i by value
+  opts.forEach(function(opt, i) {
+    var el = document.getElementById('qz-opt-' + i);
+    if (el) {
+      (function(capturedI) {
+        el.addEventListener('click', function() {
+          handleAnswer(capturedI, correctIdx, q.explanation || '');
+        });
+      })(i);
+    }
+  });
+}
+
+function esc(s) {
+  if (!s) return '';
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;');
+}
+
+function handleAnswer(chosen, correct, explanation) {
+  if (qzAnswered) return;
+  qzAnswered = true;
+
+  // Color all options - disable all first
+  for (var i = 0; i < 4; i++) {
+    var el = document.getElementById('qz-opt-' + i);
+    if (!el) continue;
+    el.style.pointerEvents = 'none';
+    var lbl = el.querySelector('.qz-lbl');
+    if (i === correct) {
+      // Always highlight correct answer in green
+      el.style.borderColor = '#22C55E';
+      el.style.background = 'rgba(34,197,94,0.12)';
+      if (lbl) { lbl.style.background = '#22C55E'; lbl.style.borderColor = '#22C55E'; lbl.style.color = '#fff'; }
+    } else if (i === chosen && chosen !== correct) {
+      // Highlight wrong choice in red
+      el.style.borderColor = '#F43F5E';
+      el.style.background = 'rgba(244,63,94,0.08)';
+      if (lbl) { lbl.style.background = '#F43F5E'; lbl.style.borderColor = '#F43F5E'; lbl.style.color = '#fff'; }
+    }
+  }
+
+  if (chosen === correct) qzScore++;
+
+  // Show explanation
+  var explEl = document.getElementById('qz-expl');
+  if (explEl) {
+    var icon = chosen === correct ? '✅' : '❌';
+    var msg = chosen === correct ? 'Correct! ' : 'Wrong. ';
+    explEl.innerHTML = icon + ' <strong>' + msg + '</strong>' + (explanation ? esc(explanation) : '');
+    explEl.classList.add('show');
+  }
+
+  // Swap skip → next button
+  var skipBtn = document.getElementById('qz-skip-btn');
+  var nextBtn = document.getElementById('qz-next-btn');
+  if (skipBtn) skipBtn.style.display = 'none';
+  if (nextBtn) {
+    nextBtn.style.display = 'block';
+    nextBtn.textContent = (qzIdx < qzQuestions.length - 1) ? 'Next →' : 'See Results';
+  }
+}
+
+function skipQz() {
+  qzIdx++;
+  renderQz();
+}
+
+function nextQz() {
+  qzIdx++;
+  renderQz();
+}
+
+function showQzResult() {
+  var total = qzQuestions.length;
+  var pct = total > 0 ? Math.round((qzScore / total) * 100) : 0;
+  var emoji = pct >= 80 ? '🏆' : pct >= 60 ? '😊' : pct >= 40 ? '📚' : '💪';
+  var msg = pct >= 80 ? 'Excellent! You know this topic well!' :
+            pct >= 60 ? 'Good job! Review the ones you missed.' :
+            pct >= 40 ? 'Keep practicing! Check the Shortcuts tab.' :
+                        'Need more practice. Read the topic notes first, then retry.';
+  var scoreColor = pct >= 60 ? '#22C55E' : pct >= 40 ? '#F59E0B' : '#F43F5E';
+  var html = '<div class="qz-result">';
+  html += '<div style="font-size:2.8rem;margin-bottom:8px">' + emoji + '</div>';
+  html += '<div class="qz-result-score" style="color:' + scoreColor + '">' + qzScore + '/' + total + '</div>';
+  html += '<div class="qz-result-lbl">' + pct + '% correct · Day ' + qzDayNum + ' — ' + esc(qzTopicName) + '</div>';
+  html += '<div class="qz-result-msg">' + msg + '</div>';
+  html += '<div class="qz-result-btns">';
+  html += '<button class="qz-result-btn" style="background:var(--p);color:#fff" onclick="retryQuiz()">🔄 Retry</button>';
+  html += '<button class="qz-result-btn" style="background:var(--bg2);color:var(--text);border:1px solid var(--border)" onclick="closeQuiz()">✓ Done</button>';
+  html += '</div></div>';
+  document.getElementById('quiz-body').innerHTML = html;
+}
+
+function retryQuiz() {
+  startDayPractice(qzDayNum, qzTopicName, qzSubject);
+}
+
+// Close on backdrop click
+document.getElementById('quiz-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeQuiz();
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+  var overlay = document.getElementById('quiz-overlay');
+  if (!overlay || !overlay.classList.contains('open')) return;
+  if (e.key === 'Escape') { closeQuiz(); return; }
+  if (!qzAnswered) {
+    if (e.key === '1' || e.key === 'a' || e.key === 'A') { var el = document.getElementById('qz-opt-0'); if(el) el.click(); }
+    if (e.key === '2' || e.key === 'b' || e.key === 'B') { var el = document.getElementById('qz-opt-1'); if(el) el.click(); }
+    if (e.key === '3' || e.key === 'c' || e.key === 'C') { var el = document.getElementById('qz-opt-2'); if(el) el.click(); }
+    if (e.key === '4' || e.key === 'd' || e.key === 'D') { var el = document.getElementById('qz-opt-3'); if(el) el.click(); }
+  } else {
+    if (e.key === 'Enter' || e.key === 'ArrowRight') nextQz();
+  }
+});
+</script>
+</body>
+</html>

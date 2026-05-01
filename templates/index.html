@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Rankora — MCA PGCET 2026</title>
+<!-- PWA -->
+<link rel="manifest" href="/static/manifest.json">
+<meta name="theme-color" content="#6366F1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Rankora">
+<link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+<meta name="description" content="Karnataka PGCET MCA 2026 Practice App — 3400+ questions, MCA Full Mock, Daily Challenge">
+<link rel="stylesheet" href="/static/css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- HOME -->
+<div id="home-screen" class="screen active">
+
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <span class="nav-logo-text">Rank<span>ora</span></span>
+    </a>
+    <div class="nav-right">
+      <span class="theme-icon" id="theme-icon">🌙</span>
+      <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode"></button>
+      <a href="/admin" class="nav-admin">⚙ Admin</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-chip">Karnataka PGCET · MCA 2026</div>
+    <h1 class="hero-title">
+      Score higher,<br>
+      <span class="accent">study smarter</span>
+    </h1>
+    <p class="hero-sub">3,400+ questions · 5 test modes · Karnataka PGCET MCA 2026</p>
+    <div class="countdown" style="display:none">
+      <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">Days</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-hrs">--</span><span class="cd-lbl">Hrs</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-min">--</span><span class="cd-lbl">Min</span></div>
+    </div>
+  </div>
+
+  <div class="home-body">
+    <div class="sec-label">Practice Modes</div>
+    <div class="mode-list">
+      <div class="mcard featured" onclick="startMCAMock()">
+        <div class="mcard-icon">🎓</div>
+        <div class="mcard-body">
+          <div class="mcard-name">MCA Full Mock — Official Pattern</div>
+          <div class="mcard-meta">80 Questions · Part A (60×1) + Part B (20×2) · 100 Marks · 120 Min</div>
+        </div>
+        <span class="mcard-badge badge-exam">Real Exam</span>
+        <span class="mcard-arrow">›</span>
+      </div>
+      <div class="mcard" onclick="startMode('full',100)">
+        <div class="mcard-icon">📋</div>
+        <div class="mcard-body">
+          <div class="mcard-name">Old Pattern Mock (5 sections)</div>
+          <div class="mcard-meta">100 Questions · 1 Mark Each · All 5 Sections</div>
+        </div>
+        <span class="mcard-arrow">›</span>
+      </div>
+      <div class="mcard" onclick="startMode('mini',50)">
+        <div class="mcard-icon">⚡</div>
+        <div class="mcard-body">
+          <div class="mcard-name">Mini Test</div>
+          <div class="mcard-meta">50 Questions · 60 Min</div>
+        </div>
+        <span class="mcard-arrow">›</span>
+      </div>
+      <div class="mcard" onclick="startMode('quick',20)">
+        <div class="mcard-icon">🎯</div>
+        <div class="mcard-body">
+          <div class="mcard-name">Quick Test</div>
+          <div class="mcard-meta">20 Questions · 24 Min</div>
+        </div>
+        <span class="mcard-arrow">›</span>
+      </div>
+      <div class="mcard" onclick="startMode('sprint',10)">
+        <div class="mcard-icon">🏃</div>
+        <div class="mcard-body">
+          <div class="mcard-name">Sprint</div>
+          <div class="mcard-meta">10 Questions · 12 Min</div>
+        </div>
+        <span class="mcard-arrow">›</span>
+      </div>
+      <div class="mcard fire" onclick="startDaily()">
+        <div class="mcard-icon">🔥</div>
+        <div class="mcard-body">
+          <div class="mcard-name">Daily Challenge</div>
+          <div class="mcard-meta">10 Sure-Shot Questions · Changes Daily</div>
+        </div>
+        <span class="mcard-badge badge-hot">Hot</span>
+        <span class="mcard-arrow">›</span>
+      </div>
+      <div class="mcard star" onclick="startImportant()">
+        <div class="mcard-icon">⭐</div>
+        <div class="mcard-body">
+          <div class="mcard-name">Important Questions</div>
+          <div class="mcard-meta">20 Most Repeated · Must Attempt</div>
+        </div>
+        <span class="mcard-badge badge-must">Must Do</span>
+        <span class="mcard-arrow">›</span>
+      </div>
+      <div class="mcard study" onclick="window.location.href='/study'">
+        <div class="mcard-icon">📚</div>
+        <div class="mcard-body">
+          <div class="mcard-name">Study — Q&amp;A with Answers</div>
+          <div class="mcard-meta">All 3400+ Questions · Read &amp; Learn · With Explanations</div>
+        </div>
+        <span class="mcard-badge badge-study">Study</span>
+        <span class="mcard-arrow">›</span>
+      </div>
+      <div class="mcard plan" onclick="window.location.href='/plan'">
+        <div class="mcard-icon">🗓️</div>
+        <div class="mcard-body">
+          <div class="mcard-name">23-Day Study Plan</div>
+          <div class="mcard-meta">Shortcuts · Topic Priority · Daily Routine · Score 70+</div>
+        </div>
+        <span class="mcard-badge badge-plan">Must Read</span>
+        <span class="mcard-arrow">›</span>
+      </div>
+    </div>
+
+    <div class="sec-label" style="margin-top:24px">Practice Papers &amp; Model Paper</div>
+    <div class="pyq-hint" style="margin-bottom:8px;color:var(--amber);font-size:.65rem;">⚠️ These are <strong>practice papers</strong> based on PGCET MCA pattern — not official KEA papers</div>
+    <div class="pyq-grid">
+      <div class="pyq-tile" onclick="openPYQ('2025')">
+        <div class="pyq-year">2025</div>
+        <div class="pyq-sub">Practice Set</div>
+      </div>
+      <div class="pyq-tile" onclick="openPYQ('2024')">
+        <div class="pyq-year">2024</div>
+        <div class="pyq-sub">Practice Set</div>
+      </div>
+      <div class="pyq-tile" onclick="openPYQ('2023')">
+        <div class="pyq-year">2023</div>
+        <div class="pyq-sub">Practice Set</div>
+      </div>
+      <div class="pyq-tile" onclick="openPYQ('2022')">
+        <div class="pyq-year">2022</div>
+        <div class="pyq-sub">Practice Set</div>
+      </div>
+      <div class="pyq-tile model" onclick="openModel()">
+        <div class="pyq-year">📝</div>
+        <div class="pyq-sub">Model 2026</div>
+      </div>
+    </div>
+    <div class="pyq-hint">Tap to <strong>view with answers</strong> · Use Practice Quiz button inside to attempt as test</div>
+
+    <div class="subj-row" style="margin-top:20px">
+      <span class="subj-chip chip-ca">💻 Computer Awareness</span>
+      <span class="subj-chip chip-en">📖 English</span>
+      <span class="subj-chip chip-gk">🌍 General Knowledge</span>
+      <span class="subj-chip chip-ar">🧠 Reasoning</span>
+      <span class="subj-chip chip-qa">📐 Quantitative</span>
+    </div>
+
+    <div class="home-footer">Made with ♥ by <span>Kowshik</span> · Rankora © 2026</div>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div id="loading-screen" class="screen">
+  <div class="load-wrap">
+    <div class="load-ring"></div>
+    <div class="load-title">Loading your test…</div>
+    <p class="load-tip" id="loading-tip"></p>
+  </div>
+</div>
+
+<!-- EXAM -->
+<div id="exam-screen" class="screen">
+  <div class="exam-bar">
+    <div class="bar-left">
+      <button class="bar-exit" onclick="confirmExit()">✕</button>
+      <span class="bar-mode" id="exam-mode-label">Full Mock Test</span>
+    </div>
+    <div class="bar-timer" id="timer-wrap">⏱ <span id="timer">02:00:00</span></div>
+    <div class="bar-done"><span id="answered-count">0</span>/<span id="total-count">100</span> done</div>
+  </div>
+  <div class="exam-prog"><div class="exam-prog-fill" id="exam-progress-fill"></div></div>
+
+  <div class="exam-body">
+    <div class="q-panel">
+      <div class="q-meta">
+        <span class="q-badge" id="q-number">Q 1</span>
+        <span class="q-subj-badge" id="q-subject">Computer Awareness</span>
+        <span class="q-hot-badge" id="q-hint-tag"></span>
+      </div>
+      <div class="q-box" id="q-text">Loading…</div>
+      <div class="opts">
+        <div class="opt" id="opt-row-1" onclick="selectOption(1)">
+          <div class="omr" id="bubble-1"><span class="omr-lbl">A</span></div>
+          <div class="opt-txt" id="opt-1">Option A</div>
+        </div>
+        <div class="opt" id="opt-row-2" onclick="selectOption(2)">
+          <div class="omr" id="bubble-2"><span class="omr-lbl">B</span></div>
+          <div class="opt-txt" id="opt-2">Option B</div>
+        </div>
+        <div class="opt" id="opt-row-3" onclick="selectOption(3)">
+          <div class="omr" id="bubble-3"><span class="omr-lbl">C</span></div>
+          <div class="opt-txt" id="opt-3">Option C</div>
+        </div>
+        <div class="opt" id="opt-row-4" onclick="selectOption(4)">
+          <div class="omr" id="bubble-4"><span class="omr-lbl">D</span></div>
+          <div class="opt-txt" id="opt-4">Option D</div>
+        </div>
+      </div>
+      <div class="q-nav">
+        <button class="btn-prev" id="btn-prev" onclick="prevQ()">◀ Prev</button>
+        <button class="btn-clr" onclick="clearAns()">✕ Clear</button>
+        <button class="btn-next" id="btn-next" onclick="nextQ()">Next ▶</button>
+      </div>
+      <div class="submit-wrap">
+        <button class="btn-submit" onclick="confirmSubmit()">Submit Test</button>
+      </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+      <div class="sb-hdr">
+        <span class="sb-title">Question Palette</span>
+        <button class="sb-close" onclick="toggleSidebar()">✕</button>
+      </div>
+      <div class="sb-legend">
+        <span><span class="leg g"></span>Answered</span>
+        <span><span class="leg gr"></span>Not Answered</span>
+        <span><span class="leg v"></span>Current</span>
+      </div>
+      <div class="pal-grid" id="palette-grid"></div>
+      <div class="sec-jumps" id="section-jumps"></div>
+    </div>
+  </div>
+  <button class="pal-fab" onclick="toggleSidebar()" id="palette-fab">
+    <span id="fab-count">0</span>/100
+  </button>
+</div>
+
+<!-- RESULT -->
+<div id="result-screen" class="screen">
+  <div class="result-wrap">
+    <div class="score-card" id="score-card">
+      <div class="score-emoji" id="score-emoji">🎉</div>
+      <div class="score-lbl">Your Score</div>
+      <div class="score-num">
+        <span id="res-score">0</span><span class="slash">/</span><span class="tot" id="res-total">100</span>
+      </div>
+      <div class="score-pct" id="res-pct">0%</div>
+      <div class="score-msg" id="score-msg">Keep going!</div>
+    </div>
+    <div class="res-stats">
+      <div class="res-stat c"><div class="res-stat-num" id="rs-correct">0</div><div class="res-stat-lbl" id="rs-correct-lbl">✅ Marks</div></div>
+      <div class="res-stat w"><div class="res-stat-num" id="rs-wrong">0</div><div class="res-stat-lbl">❌ Wrong</div></div>
+      <div class="res-stat s"><div class="res-stat-num" id="rs-skip">0</div><div class="res-stat-lbl">⏭ Skipped</div></div>
+      <div class="res-stat a"><div class="res-stat-num" id="rs-acc">0%</div><div class="res-stat-lbl">🎯 Accuracy</div></div>
+    </div>
+    <div class="breakdown">
+      <div class="breakdown-title">Section-wise Performance</div>
+      <div id="section-breakdown"></div>
+    </div>
+    <div class="res-actions">
+      <button class="btn-review" onclick="toggleReview()">📋 Review Answers</button>
+      <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    </div>
+    <div id="review-panel" style="display:none">
+      <div class="review-heading">📋 Answer Review with Explanations</div>
+      <div id="review-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-icon" id="modal-icon">⚠️</div>
+    <h3 id="modal-title">Confirm</h3>
+    <p id="modal-msg">Are you sure?</p>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-confirm" onclick="modalConfirm()">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="/static/js/exam.js"></script>
+<script>
+// Theme toggle
+function toggleTheme() {
+  var html = document.documentElement;
+  var isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('theme-icon').textContent = isDark ? '🌙' : '☀️';
+  localStorage.setItem('rankora-theme', isDark ? 'light' : 'dark');
+}
+// Load saved theme
+(function() {
+  var saved = localStorage.getItem('rankora-theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  var icon = document.getElementById('theme-icon');
+  if (icon) icon.textContent = saved === 'dark' ? '☀️' : '🌙';
+})();
+
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/static/sw.js')
+      .then(function(reg) { console.log('SW registered:', reg.scope); })
+      .catch(function(err) { console.log('SW error:', err); });
+  });
+}
+
+// Handle shortcut URLs
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('daily') === '1') {
+    window.history.replaceState({}, '', '/');
+    setTimeout(function() { startDaily(); }, 500);
+  }
+})();
+</script>
+</body>
+</html>
