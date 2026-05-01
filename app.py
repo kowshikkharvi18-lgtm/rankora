@@ -1,4 +1,4 @@
-﻿from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template
 import random, os
 from datetime import datetime, date
 
@@ -6,7 +6,9 @@ app = Flask(__name__, static_folder="static", template_folder="templates")
 
 USE_MYSQL = False
 MYSQL_CONFIG = {"host":"localhost","user":"root","password":"","database":"pgcet_omr"}
-DB_FILE = "pgcet_omr.db"
+# Use DB_PATH env var if set (e.g. /tmp/pgcet_omr.db on Render),
+# otherwise fall back to the repo file for local dev.
+DB_FILE = os.environ.get("DB_PATH", "pgcet_omr.db")
 
 # ── DB ────────────────────────────────────────────────────────────────────────
 def get_db():

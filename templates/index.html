@@ -169,6 +169,11 @@
     </div>
 
     <div class="home-footer">Made with ♥ by <span>Kowshik</span> · Rankora © 2026</div>
+
+    <!-- PWA Install Button -->
+    <div id="install-btn" style="display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#6366F1,#F43F5E);color:#fff;border:none;border-radius:24px;padding:13px 28px;font-size:.88rem;font-weight:700;cursor:pointer;box-shadow:0 8px 30px rgba(99,102,241,.4);z-index:500;align-items:center;gap:8px;font-family:Inter,sans-serif;" onclick="installApp()">
+      📲 Install Rankora App
+    </div>
   </div>
 </div>
 
@@ -321,6 +326,32 @@ if ('serviceWorker' in navigator) {
       .catch(function(err) { console.log('SW error:', err); });
   });
 }
+
+// PWA Install Button
+var deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  var btn = document.getElementById('install-btn');
+  if (btn) btn.style.display = 'flex';
+});
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function(result) {
+      deferredPrompt = null;
+      var btn = document.getElementById('install-btn');
+      if (btn) btn.style.display = 'none';
+    });
+  }
+}
+
+window.addEventListener('appinstalled', function() {
+  var btn = document.getElementById('install-btn');
+  if (btn) btn.style.display = 'none';
+  deferredPrompt = null;
+});
 
 // Handle shortcut URLs
 (function() {
